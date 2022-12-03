@@ -27,3 +27,9 @@ def test(tests: list[tuple[dict[str, str], str]]):
 
         return internal
     return decorator
+
+def parse(line: list[str], *convert) -> tuple:
+    return [c(l) for c, l in zip(*convert, line)]
+
+def split(data: list[str], *convert) -> tuple:
+    return [parse(line.split(), convert) for line in data]

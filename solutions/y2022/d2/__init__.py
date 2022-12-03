@@ -1,5 +1,5 @@
 """Solutions for the day"""
-from aoc.puzzles import test
+from aoc.puzzles import test, split
 
 from functools import reduce
 
@@ -81,11 +81,11 @@ def get_shape(opponent, player) -> bytes:
 def solve0(data: dict[str, list[str]]) -> str:
     """First solution"""
     sample = data["sample"]
-    return str(sum([get_score(o, p) + get_value(p) for o, p in [line.split() for line in sample]]))
+    return str(sum([get_score(o, p) + get_value(p) for o, p in split(sample, str, str)]))
 
 
 @test([({"sample": "test"}, "12")])
 def solve1(data: list[str]) -> str:
     """Second solution"""
     sample = data["sample"]
-    return str(sum([get_score(o, get_shape(o, p)) + get_value(get_shape(o, p)) for o, p in [line.split() for line in sample]]))
+    return str(sum([get_score(o, get_shape(o, p)) + get_value(get_shape(o, p)) for o, p in split(sample, str, str)]))
