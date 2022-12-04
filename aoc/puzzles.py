@@ -11,7 +11,7 @@ def get_input(package: str) -> dict[str, list[str]]:
     inputs = [filename for filename in listdir(package) if filename.endswith(".txt")]
     return {filename.replace(".txt", ""): readall(path.join(package, filename)) for filename in inputs}
 
-def test(tests: list[tuple[dict[str, str], str]]):
+def test(tests: list[tuple[dict[str, str], str]], *checks):
     """Runs tests"""
     def decorator(func):
         """Runs tests or throws on error"""
@@ -23,13 +23,26 @@ def test(tests: list[tuple[dict[str, str], str]]):
                 result = func(data)
                 if expected != result:
                     raise Exception(f"{repr(expected)} != {repr(result)}")
-            return func(original_data)
+            result = func(original_data)
+            for check in checks:
+                check(result)
 
+            return result
         return internal
     return decorator
+
+def lower(wrong: int) -> bool:
+    def check(num: str):
+        assert int(num) < wrong, f"{num} should be lower than {wrong}"
+    return check
+
+def higher(wrong: int) -> bool:
+    def check(num: str):
+        assert int(num) > wrong, f"{num} should be higher than {wrong}"
+    return check
 
 def parse(line: list[str], *convert) -> tuple:
     return [c(l) for c, l in zip(*convert, line)]
 
-def split(data: list[str], *convert) -> tuple:
-    return [parse(line.split(), convert) for line in data]
+def split(data: list[str], *convert, sep=None) -> tuple:
+    return [parse(line.split(sep), convert) for line in data]

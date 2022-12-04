@@ -26,11 +26,11 @@ def build_m(data: list[tuple[int, int]]) -> np.array:
 def solve0(data: dict[str, list[str]]) -> str:
     """First solution"""
     sample = split(data["sample"], ord, ord)
-    return str(np.sum(np.multiply(m1, build_m(sample))))
+    return str(np.sum(m1 * build_m(sample)))
 
 
 @test([({"sample": "test"}, "12")])
 def solve1(data: list[str]) -> str:
     """Second solution"""
     sample = split(data["sample"], ord, ord)
-    return str(np.sum(np.multiply(m2, build_m(sample))))
+    return str(np.sum(m2 * build_m(sample)))
