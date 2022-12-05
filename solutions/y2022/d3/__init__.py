@@ -1,7 +1,9 @@
 """Solutions for the day"""
-from aoc.puzzles import test, split
-
 from functools import reduce
+
+import numpy as np
+
+from aoc.puzzles import test, split, lower, higher, equals
 
 
 @test([({"sample": "test"}, "157")])

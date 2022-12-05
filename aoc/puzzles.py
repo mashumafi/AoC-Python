@@ -41,6 +41,11 @@ def higher(wrong: int) -> bool:
         assert int(num) > wrong, f"{num} should be higher than {wrong}"
     return check
 
+def equals(correct) -> bool:
+    def check(num: str):
+        assert num == str(correct), f"{num} should be equal {correct}"
+    return check
+
 def parse(line: list[str], *convert) -> tuple:
     return [c(l) for c, l in zip(*convert, line)]
 

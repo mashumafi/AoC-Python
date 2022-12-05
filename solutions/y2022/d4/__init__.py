@@ -3,7 +3,7 @@ from functools import reduce
 
 import numpy as np
 
-from aoc.puzzles import test, split
+from aoc.puzzles import test, split, lower, higher, equals
 
 
 def parse_range(r: str) -> set[int]:
