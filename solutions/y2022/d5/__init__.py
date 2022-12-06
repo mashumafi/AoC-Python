@@ -12,12 +12,12 @@ def solve0(data: dict[str, list[str]]) -> str:
     sample = data["sample"]
     end_stacks = sample.index("")
     stacks = sample[:end_stacks - 1]
-    layout = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+    layout = [[] for i in range(26)]
     for stack in stacks:
-        stack = [stack[i:i+4] for i in range(0, len(stack), 4)]
+        stack = [stack[i+1:i+2:i+4] for i in range(0, len(stack), 4)]
         for i, stack in enumerate(stack):
-            if stack[1] != " ":
-                layout[i] += [stack[1]]
+            if stack != " ":
+                layout[i] += [stack]
 
     moves = sample[end_stacks + 1:]
 
@@ -38,12 +38,12 @@ def solve1(data: list[str]) -> str:
     sample = data["sample"]
     end_stacks = sample.index("")
     stacks = sample[:end_stacks - 1]
-    layout = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]
+    layout = [[] for i in range(26)]
     for stack in stacks:
-        stack = [stack[i:i+4] for i in range(0, len(stack), 4)]
+        stack = [stack[i+1:i+2:i+4] for i in range(0, len(stack), 4)]
         for i, stack in enumerate(stack):
-            if stack[1] != " ":
-                layout[i] += [stack[1]]
+            if stack != " ":
+                layout[i] += [stack]
 
     moves = sample[end_stacks + 1:]
 

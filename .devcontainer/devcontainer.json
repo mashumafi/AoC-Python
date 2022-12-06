@@ -10,6 +10,9 @@
 		"ghcr.io/devcontainers-contrib/features/mypy:1": {},
 		"ghcr.io/devcontainers-contrib/features/pylint:1": {},
 		"ghcr.io/devcontainers/features/github-cli:1": {}
+	},
+	"containerEnv": {
+		"AOCD_DIR": "/workspaces/aoc/.cache"
 	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
