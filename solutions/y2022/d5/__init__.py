@@ -1,5 +1,6 @@
 """Solutions for the day"""
 from functools import reduce
+from collections import defaultdict
 
 import numpy as np
 
@@ -12,12 +13,12 @@ def solve0(data: dict[str, list[str]]) -> str:
     sample = data["sample"]
     end_stacks = sample.index("")
     stacks = sample[:end_stacks - 1]
-    layout = [[] for i in range(26)]
+    layout = defaultdict(lambda : [])
     for stack in stacks:
         stack = [stack[i+1:i+2:i+4] for i in range(0, len(stack), 4)]
         for i, stack in enumerate(stack):
             if stack != " ":
-                layout[i] += [stack]
+                layout[i] += stack
 
     moves = sample[end_stacks + 1:]
 
@@ -29,7 +30,9 @@ def solve0(data: dict[str, list[str]]) -> str:
         for i in range(num):
             layout[dest] = [layout[src].pop(0)] + layout[dest]
 
-    return "".join([col[0] if col else "" for col in layout])
+    stack = list([stack for stack in layout.items()])
+    stack.sort()
+    return "".join([col[0] for i, col in stack])
 
 
 @test([({"sample": "test"}, "MCD")], equals("GNFBSBJLH"))
@@ -38,7 +41,7 @@ def solve1(data: list[str]) -> str:
     sample = data["sample"]
     end_stacks = sample.index("")
     stacks = sample[:end_stacks - 1]
-    layout = [[] for i in range(26)]
+    layout = defaultdict(lambda : [])
     for stack in stacks:
         stack = [stack[i+1:i+2:i+4] for i in range(0, len(stack), 4)]
         for i, stack in enumerate(stack):
@@ -56,4 +59,6 @@ def solve1(data: list[str]) -> str:
         for i in range(num):
             layout[src].pop(0)
 
-    return "".join([col[0] if col else "" for col in layout])
+    stack = list([stack for stack in layout.items()])
+    stack.sort()
+    return "".join([col[0] for i, col in stack])

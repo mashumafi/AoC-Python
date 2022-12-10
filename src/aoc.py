@@ -24,10 +24,12 @@ class AdventOfCode(object):
             if self.solver_count == 1:
                 if self.puzzle.answered_a:
                     print(f"Skip submitting {repr(result)}")
+                    assert self.puzzle.answer_a == result
                     return
             elif self.solver_count == 2:
                 if not self.puzzle.answered_a or self.puzzle.answered_b:
                     print(f"Skip submitting {repr(result)}")
+                    assert self.puzzle.answer_b == result
                     return
             else:
                 return
