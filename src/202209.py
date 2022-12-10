@@ -1,4 +1,4 @@
-from aoc import AdventOfCode
+from aoc import AdventOfCode, split
 import numpy as np
 
 aoc = AdventOfCode(year=2022, day=9)
@@ -60,6 +60,6 @@ def solve(moves: list[tuple[str, int]], rope_len: int) -> int:
 @aoc(expected=36)
 def puzzle2(data: list[str]) -> str:
     """Solve puzle 2"""
-    moves = [(x.split(' ')[0], int(x.split(' ')[1])) for x in data]
+    moves = split(data, str, int)
     print(solve(moves, 2))
     return str(solve(moves, 10))

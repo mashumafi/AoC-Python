@@ -24,12 +24,14 @@ class AdventOfCode(object):
             if self.solver_count == 1:
                 if self.puzzle.answered_a:
                     print(f"Skip submitting {repr(result)}")
-                    assert self.puzzle.answer_a == result
+                    if self.puzzle.answer_a != result:
+                        print("Wrong answer")
                     return
             elif self.solver_count == 2:
                 if not self.puzzle.answered_a or self.puzzle.answered_b:
                     print(f"Skip submitting {repr(result)}")
-                    assert self.puzzle.answer_b == result
+                    if self.puzzle.answer_b != result:
+                        print("Wrong answer")
                     return
             else:
                 return
@@ -37,3 +39,9 @@ class AdventOfCode(object):
             submit(result, year=self.puzzle.year, day=self.puzzle.day, reopen=False)
 
         return decorator
+
+def parse(line: list[str], *convert) -> tuple:
+    return [c(l) for c, l in zip(*convert, line)]
+
+def split(data: list[str], *convert, sep=None) -> tuple:
+    return [parse(line.split(sep), convert) for line in data]
