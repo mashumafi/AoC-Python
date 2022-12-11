@@ -2,6 +2,8 @@
 from aocd import submit
 from aocd.models import Puzzle
 
+import re
+
 class AdventOfCode(object):
     def __init__(self, *, year, day) -> None:
         self.puzzle = Puzzle(year=year, day=day)
@@ -45,3 +47,6 @@ def parse(line: list[str], *convert) -> tuple:
 
 def split(data: list[str], *convert, sep=None) -> tuple:
     return [parse(line.split(sep), convert) for line in data]
+
+def get_ints(line: str) -> list[int]:
+    return [int(i) for i in re.findall("\\d*", line) if i]
